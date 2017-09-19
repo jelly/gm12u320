@@ -15,7 +15,6 @@
 #include <drm/drmP.h>
 #include <drm/drm_crtc.h>
 #include <drm/drm_crtc_helper.h>
-#include <drm/drm_atomic_helper.h>
 #include <drm/drm_plane_helper.h>
 #include "gm12u320_drv.h"
 
@@ -50,7 +49,8 @@ static void gm12u320_crtc_destroy(struct drm_crtc *crtc)
 static int gm12u320_crtc_page_flip(struct drm_crtc *crtc,
 				   struct drm_framebuffer *drm_fb,
 				   struct drm_pending_vblank_event *event,
-				   uint32_t page_flip_flags)
+				   uint32_t page_flip_flags,
+				   struct drm_modeset_acquire_ctx *ctx)
 {
 	struct gm12u320_framebuffer *fb = to_gm12u320_fb(drm_fb);
 	struct drm_device *dev = crtc->dev;
@@ -88,7 +88,7 @@ static const struct drm_crtc_helper_funcs gm12u320_helper_funcs = {
 static const struct drm_crtc_funcs gm12u320_crtc_funcs = {
 	.set_config = drm_crtc_helper_set_config,
 	.destroy = gm12u320_crtc_destroy,
-	.page_flip = drm_atomic_helper_page_flip,
+	.page_flip = gm12u320_crtc_page_flip,
 };
 
 static int gm12u320_crtc_init(struct drm_device *dev)
