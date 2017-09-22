@@ -105,7 +105,7 @@ static void gm12u320_usb_disconnect(struct usb_interface *interface)
 	drm_kms_helper_poll_disable(dev);
 	gm12u320_fbdev_unplug(dev);
 	gm12u320_stop_fb_update(dev);
-	drm_unplug_dev(dev);
+	drm_dev_unplug(dev);
 }
 
 #ifdef CONFIG_PM
@@ -134,7 +134,7 @@ int gm12u320_resume(struct usb_interface *interface)
 }
 #endif
 
-static struct usb_device_id id_table[] = {
+static const struct usb_device_id id_table[] = {
 	{ USB_DEVICE(0x1de1, 0xc102) },
 	{},
 };
