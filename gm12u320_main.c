@@ -488,7 +488,7 @@ void gm12u320_driver_unload(struct drm_device *dev)
 {
 	struct gm12u320_device *gm12u320 = dev->dev_private;
 
-	drm_vblank_cleanup(dev);
+	//drm_vblank_cleanup(dev);
 	gm12u320_fbdev_cleanup(dev);
 	gm12u320_modeset_cleanup(dev);
 	gm12u320_usb_free(gm12u320);
